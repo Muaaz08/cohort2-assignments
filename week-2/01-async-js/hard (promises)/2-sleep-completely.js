@@ -5,6 +5,32 @@
  */
 
 function sleep(milliseconds) {
+  return new Promise((resolve, reject) => {
+    // console.log("Sleep beginning....");
+    let startTime = new Date();
+
+    let givenSeconds = milliseconds * 1000;
+    let isRunning = true;
+
+    while (isRunning) {
+      let nowTime = new Date();
+      let diffTime = parseInt(
+        Math.abs(startTime.getTime() - nowTime.getTime())
+      );
+      // console.log({ diffTime });
+
+      if (diffTime > givenSeconds) {
+        isRunning = false;
+        break;
+      }
+    }
+    resolve();
+  });
 }
+
+console.log("starting ");
+sleep(10).then(() => {
+  console.log("sleep done...!");
+});
 
 module.exports = sleep;
